@@ -58,9 +58,9 @@ export function BSStackedChart({ data }: BSStackedChartProps) {
   const equitySubs = new Set<string>();
 
   Object.values(data).forEach(categories => {
-    categories.資産?.forEach(item => assetSubs.add(item.subcategory));
-    categories.負債?.forEach(item => liabilitySubs.add(item.subcategory));
-    categories.純資産?.forEach(item => equitySubs.add(item.subcategory));
+    categories.資産?.forEach((item: SubcategoryItem) => assetSubs.add(item.subcategory));
+    categories.負債?.forEach((item: SubcategoryItem) => liabilitySubs.add(item.subcategory));
+    categories.純資産?.forEach((item: SubcategoryItem) => equitySubs.add(item.subcategory));
   });
 
   const CustomTooltip = ({ active, payload, label }: {
