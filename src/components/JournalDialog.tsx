@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -51,13 +51,7 @@ export function JournalDialog({
   const [page, setPage] = useState(0);
   const limit = 20;
 
-  useEffect(() => {
-    if (open && accountCode) {
-      fetchEntries();
-    }
-  }, [open, accountCode, termFilter, page]);
-
-  const fetchEntries = async () => {
+  const fetchEntries = useCallback(async () => {
     if (!accountCode) return;
     
     setLoading(true);
@@ -77,7 +71,13 @@ export function JournalDialog({
     } finally {
       setLoading(false);
     }
-  };
+  }, [accountCode, termFilter, page, limit]);
+
+  useEffect(() => {
+    if (open && accountCode) {
+      fetchEntries();
+    }
+  }, [open, accountCode, fetchEntries]);
 
   const totalPages = Math.ceil(total / limit);
 

@@ -20,12 +20,6 @@ interface AssetCompositionChartProps {
   selectedTerm: number;
 }
 
-const COLORS = [
-  'hsl(220, 90%, 55%)',
-  'hsl(0, 72%, 51%)',
-  'hsl(160, 72%, 42%)'
-];
-
 export function AssetCompositionChart({ data, selectedTerm }: AssetCompositionChartProps) {
   const termData = data[selectedTerm];
   
