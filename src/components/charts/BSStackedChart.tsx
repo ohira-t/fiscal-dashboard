@@ -24,23 +24,28 @@ const ASSET_COLORS = [
   'hsl(220, 60%, 80%)'
 ];
 
+interface SubcategoryItem {
+  subcategory: string;
+  total: number;
+}
+
 export function BSStackedChart({ data }: BSStackedChartProps) {
   // Transform data for stacked bar chart
   const chartData = Object.entries(data).map(([term, categories]) => {
     const result: Record<string, number | string> = { term: `${term}期` };
     
     // Assets
-    categories.資産?.forEach((item) => {
+    categories.資産?.forEach((item: SubcategoryItem) => {
       result[`資産_${item.subcategory}`] = item.total;
     });
     
     // Liabilities
-    categories.負債?.forEach((item) => {
+    categories.負債?.forEach((item: SubcategoryItem) => {
       result[`負債_${item.subcategory}`] = item.total;
     });
     
     // Equity
-    categories.純資産?.forEach((item) => {
+    categories.純資産?.forEach((item: SubcategoryItem) => {
       result[`純資産_${item.subcategory}`] = item.total;
     });
     
